@@ -1,34 +1,40 @@
+// AquaBus Device
+//
+// This software is provided "as is" without express or implied warranty.
+
+// Debug related definitions
+// #define DEBUG
+#ifdef DEBUG
+  #define DEBUG_SERIAL_BEGIN() Serial.begin(9600)
+  #define DEBUG_LOG(string) Serial.print(string)
+  #define DEBUG_LOG_LN(string) Serial.println(string)
+#else
+  #define DEBUG_SERIAL_BEGIN()
+  #define DEBUG_LOG(string)
+  #define DEBUG_LOG_LN(string)
+#endif
+#define DEBUG_LOG_FREE_RAM() DEBUG_LOG(F("Free RAM: ")); DEBUG_LOG_LN(FreeRam())
+
+// Include header files
 #include <AquaBusLib.h>
+
+// Declare global variables
+AquaBusLib gAquaBusLib;
 
 // Setup code
 void setup()
 {
-  eMBInit(MB_RTU, 0x00, 0, 19200, MB_PAR_EVEN);
-  eMBEnable();
+  // Initialize the serial communication for debugging
+  DEBUG_SERIAL_BEGIN();
+  DEBUG_LOG_LN(F("Starting Aqua Bus Device sketch ..."));
+
+  // Call the AquaBus library setup function
+  gAquaBusLib.setup();
 }
 
 // Main code
 void loop()
 {
-  eMBPoll();
-}
-
-// Callback function called to get or set the value of a Coil Register
-eMBErrorCode eMBRegCoilsCB (UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNCoils, eMBRegisterMode eMode)
-{  
-}
-
-// Callback function called to get the value of an Input Discrete Register
-eMBErrorCode eMBRegDiscreteCB (UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNDiscrete)
-{  
-}
-
-// Callback function called to get or set the value of a Holding Register
-eMBErrorCode eMBRegHoldingCB (UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNRegs, eMBRegisterMode eMode)
-{  
-}
-
-// Callback function called to get the value of an Input Register
-eMBErrorCode eMBRegInputCB (UCHAR *pucRegBuffer, USHORT usAddress, USHORT usNRegs)
-{  
+  // Call the AquaBus library loop function
+  gAquaBusLib.loop();
 }
