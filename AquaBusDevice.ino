@@ -29,7 +29,7 @@ void setup()
   DEBUG_LOG_LN(F("Starting Aqua Bus Device sketch ..."));
 
   // Call the AquaBus library setup function
-  gAquaBusLib.setup();
+  gAquaBusLib.setup(AquaBusLib::Device::EB8);
 }
 
 // Main code
