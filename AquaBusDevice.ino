@@ -20,7 +20,7 @@
 
 // Declare global variables
 AquaBusLib gAquaBusLib(1);
-EB8 gEB8;
+EB8 gEB8(0x1234);
 
 // Setup code
 void setup()
