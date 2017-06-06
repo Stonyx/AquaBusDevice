@@ -19,7 +19,8 @@
 #include <AquaBusLib.h>
 
 // Declare global variables
-AquaBusLib gAquaBusLib;
+AquaBusLib gAquaBusLib(1);
+EB8 gEB8;
 
 // Setup code
 void setup()
@@ -28,8 +29,11 @@ void setup()
   DEBUG_SERIAL_BEGIN();
   DEBUG_LOG_LN(F("Starting Aqua Bus Device sketch ..."));
 
-  // Call the AquaBus library setup function
-  gAquaBusLib.setup();
+  // Add the devices to the AquaBus
+  gAquaBusLib.addDevice(0, gEB8);
+
+  // Initialize the AquaBus devices
+  gAquaBusLib.initializeDevices();
 }
 
 // Main code
