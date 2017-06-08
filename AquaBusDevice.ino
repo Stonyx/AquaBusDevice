@@ -18,10 +18,14 @@
 // Include header files
 #include <AquaBusLib.h>
 #include <EB8.h>
+#include <PM1.h>
+#include <VDM.h>
 
 // Declare global variables
-AquaBusLib gAquaBusLib(1);
-EB8 gEB8(0x1234, 12);
+AquaBusLib gAquaBusLib(3);
+EB8 gEB8(0x1234);
+PM1 gPM1(0x1234);
+VDM gVDM(0x1234);
 
 // Setup code
 void setup()
