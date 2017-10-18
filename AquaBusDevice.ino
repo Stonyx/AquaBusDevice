@@ -23,15 +23,15 @@
 #include <AquaBusDev.h>
 #include <AquaBusLib.h>
 #include <EB8.h>
-#include <PM1.h>
-#include <VDM.h>
+//#include <PM1.h>
+//#include <VDM.h>
 
 // Declare global variables
 SoftwareSerial Serial2(8, 9); // 8 is RX, 9  is TX
-AquaBusLib gAquaBusLib(3);
+AquaBusLib gAquaBusLib(1);
 EB8 gEB8(0x1234);
-PM1 gPM1(0x1234);
-VDM gVDM(0x1234);
+//PM1 gPM1(0x1234);
+//VDM gVDM(0x1234);
 
 int incomingByte = 0;   // for incoming serial data
 
