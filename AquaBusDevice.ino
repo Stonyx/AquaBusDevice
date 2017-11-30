@@ -1,3 +1,4 @@
+#include <EEPROM.h>
 #include <SoftwareSerial.h>
 
 // AquaBus Device
@@ -22,15 +23,19 @@
 // Include header files
 #include <AquaBusDev.h>
 #include <AquaBusLib.h>
-#include <EB8.h>
+//#include <EB8.h>
+//#include <PM2.h>
 //#include <PM1.h>
+#include <PM3.h>
 //#include <VDM.h>
 
 // Declare global variables
 SoftwareSerial Serial2(8, 9); // 8 is RX, 9  is TX
 AquaBusLib gAquaBusLib(1);
-EB8 gEB8(0x1234);
+//EB8 gEB8(0x1234);
+//PM2 gPM2(0x1234);
 //PM1 gPM1(0x1234);
+PM3 gPM3(0x1234);
 //VDM gVDM(0x1234);
 
 int incomingByte = 0;   // for incoming serial data
@@ -49,12 +54,48 @@ void setup()
     pinMode(3, OUTPUT);
     digitalWrite(3, HIGH);
   #endif
+
+//AB Address Init
+eeprom_update_byte(0,0);
+
+//PM1 Init
+//  eeprom_update_byte(3, 0);
+//  eeprom_update_word(4, 0xFFF2);
+//  eeprom_update_word(6, 0xFFF9);
+//  eeprom_update_word(8, 0xFFF0);
+//  eeprom_update_word(10, 0x0238);
+//  eeprom_update_word(12, 0x1000);
+//  eeprom_update_word(14, 0x0B55);
+//  eeprom_update_word(16, 0x0E60);
+//  eeprom_update_word(18, 0x1086);
+
+//PM2 Init
+//  eeprom_update_byte(3, (CONDUCTIVITY_PROBE_RANGE_SALINITY << 1));
+//  eeprom_update_word(4, 0xFFF2);
+//  eeprom_update_word(6, 0xFFF9);
+//  eeprom_update_word(8, 0xFFF0);
+//  eeprom_update_word(10, 0x0238);
+//  eeprom_update_word(12, 0x1000);
+//  eeprom_update_word(14, 0x0B55);
+//  eeprom_update_word(16, 0x0E60);
+//  eeprom_update_word(18, 0x1086);
+
+//PM3 Init
+  eeprom_update_byte(3, (DO_PROBE_RANGE_TYPE_SAT << 1));
+  eeprom_update_word(4, 0xFFF2);
+  eeprom_update_word(6, 0xFFF9);
+  eeprom_update_word(8, 0xFFF0);
+  eeprom_update_word(10, 0x0238);
+  eeprom_update_word(12, 0x1000);
+  eeprom_update_word(14, 0x0B55);
+  eeprom_update_word(16, 0x0E60);
+  eeprom_update_word(18, 0x1086);
   
   // Initialize the AquaBus library
   gAquaBusLib.setup();
 }
 
-// Main code
+// Main cod
 void loop()
 {
   // Call the AquaBus library loop function
